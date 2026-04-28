@@ -1,0 +1,1333 @@
+<!DOCTYPE html><html lang="ko"><head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>기업분석 템플릿</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+  :root {
+    --deep-blue: #0f1e35;
+    --mid-blue: #1a2f4e;
+    --light-blue: #2a4a72;
+    --pink-main: #e8677a;
+    --pink-light: #f0939f;
+    --pink-pale: #fde8eb;
+    --slate: #8aa5c0;
+    --text-main: #1a2a3a;
+    --text-sub: #4a6080;
+    --text-light: #8aa5c0;
+    --bg-page: #f4f7fb;
+    --bg-white: #ffffff;
+    --border: #d8e4f0;
+    --accent-gold: #d4a843;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--bg-page);
+    color: var(--text-main);
+    line-height: 1.8;
+  }
+
+  /* ══════════════════════════
+     표지 — 모던 리포트 스타일
+     화이트 베이스 + 블루 포인트
+  ══════════════════════════ */
+  .cover {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+  }
+
+  /* ── 좌측 블루 사이드바 ── */
+  .cover-sidebar {
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 7px;
+    background: linear-gradient(to bottom, #1a3a6e 0%, #2a5ba8 50%, #1a3a6e 100%);
+  }
+
+  /* ── 상단 헤더 바 ── */
+  .cover-header {
+    position: relative;
+    z-index: 2;
+    padding: 36px 56px 36px 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e8eef6;
+  }
+
+  .cover-logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .cover-logo-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #2a5ba8;
+  }
+
+  .cover-logo-text {
+    font-size: 13px;
+    font-weight: 700;
+    color: #2a5ba8;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .cover-header-right {
+    font-size: 11px;
+    color: #9aacbe;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* ── 메인 콘텐츠 영역 ── */
+  .cover-body {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 56px 0 68px;
+  }
+
+  /* 배경 장식 — 작은 점 그리드 */
+  .cover-dots {
+    position: absolute;
+    bottom: 60px;
+    right: 56px;
+    width: 120px;
+    height: 120px;
+    background-image: radial-gradient(circle, #c0d4ee 1.5px, transparent 1.5px);
+    background-size: 16px 16px;
+    opacity: 0.5;
+    z-index: 0;
+  }
+
+  .cover-body-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+  }
+
+  /* 리포트 유형 라벨 */
+  .cover-type {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+
+  .cover-type-line {
+    width: 28px;
+    height: 2px;
+    background: #2a5ba8;
+  }
+
+  .cover-type-text {
+    font-size: 11px;
+    font-weight: 700;
+    color: #2a5ba8;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  /* 종목 코드 */
+  .cover-ticker {
+    font-size: 13px;
+    font-weight: 600;
+    color: #9aacbe;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+  }
+
+  /* 기업명 */
+  .cover-company {
+    font-size: 54px;
+    font-weight: 900;
+    color: #0f1e35;
+    line-height: 1.1;
+    letter-spacing: -2px;
+    margin-bottom: 6px;
+  }
+
+  /* 영문명 */
+  .cover-company-en {
+    font-size: 16px;
+    font-weight: 300;
+    color: #7a94b0;
+    letter-spacing: 2px;
+    margin-bottom: 32px;
+  }
+
+  /* 섹터 태그 */
+  .cover-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+
+  .cover-tag-chip {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 3px;
+    letter-spacing: 1px;
+  }
+
+  .cover-tag-blue {
+    background: #1a3a6e;
+    color: #ffffff;
+  }
+
+  .cover-tag-light {
+    background: #eef4ff;
+    color: #2a5ba8;
+    border: 1px solid #c0d4ee;
+  }
+
+  /* 투자의견 */
+  .cover-opinion {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 22px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0;
+  }
+
+  .cover-opinion-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+  }
+
+  .opinion-buy   { background:#eef4ff; border:1.5px solid #2a5ba8; color:#1a3a6e; }
+  .opinion-buy   .cover-opinion-dot { background:#2a5ba8; }
+  .opinion-hold  { background:#fdf8ec; border:1.5px solid #b89030; color:#7a5c10; }
+  .opinion-hold  .cover-opinion-dot { background:#b89030; }
+  .opinion-watch { background:#f4f6f9; border:1.5px solid #8aacbe; color:#445a70; }
+  .opinion-watch .cover-opinion-dot { background:#8aacbe; }
+
+  /* ── 하단 메타 바 ── */
+  .cover-footer {
+    position: relative;
+    z-index: 2;
+    padding: 0 56px 0 68px;
+    border-top: 1px solid #e8eef6;
+    background: #f8fbff;
+    display: flex;
+    align-items: stretch;
+  }
+
+  .cover-meta-item {
+    padding: 20px 28px 20px 0;
+    margin-right: 28px;
+    border-right: 1px solid #dde8f4;
+  }
+
+  .cover-meta-item:last-child {
+    border-right: none;
+    margin-right: 0;
+  }
+
+  .cover-meta-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: #9aacbe;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+
+  .cover-meta-value {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0f1e35;
+  }
+
+  .cover-meta-value.accent {
+    color: #2a5ba8;
+  }
+
+  /* ── 목차 ── */
+  .toc-section {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 64px 24px 40px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--pink-main);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .section-title {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 28px;
+  }
+
+  .toc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .toc-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    background: var(--bg-white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--text-main);
+    transition: border-color 0.2s;
+  }
+
+  .toc-item:hover {
+    border-color: var(--pink-main);
+  }
+
+  .toc-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--pink-main);
+    min-width: 20px;
+  }
+
+  .toc-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-main);
+  }
+
+  .toc-sub {
+    font-size: 11px;
+    color: var(--text-light);
+    margin-left: auto;
+    white-space: nowrap;
+  }
+
+  /* ── 본문 공통 ── */
+  .article-body {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  .content-section {
+    margin-bottom: 64px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--deep-blue);
+  }
+
+  .section-num {
+    width: 36px;
+    height: 36px;
+    background: var(--deep-blue);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--pink-main);
+    flex-shrink: 0;
+  }
+
+  .section-heading {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text-main);
+  }
+
+  .section-heading span {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-light);
+    margin-left: 10px;
+  }
+
+  /* ── 기업 기본 정보 카드 ── */
+  .info-card {
+    background: var(--mid-blue);
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .info-item {}
+
+  .info-label {
+    font-size: 11px;
+    color: var(--slate);
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+  }
+
+  .info-value {
+    font-size: 15px;
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+  .info-value.highlight {
+    color: var(--pink-light);
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* ── 텍스트 블록 ── */
+  .text-block {
+    background: var(--bg-white);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--pink-main);
+    border-radius: 0 10px 10px 0;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    color: var(--text-main);
+    line-height: 1.9;
+  }
+
+  .text-block p + p {
+    margin-top: 12px;
+  }
+
+  /* ── 소제목 ── */
+  .sub-heading {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--deep-blue);
+    margin: 28px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sub-heading::before {
+    content: '';
+    width: 4px;
+    height: 16px;
+    background: var(--pink-main);
+    border-radius: 2px;
+    display: inline-block;
+  }
+
+  /* ── 표 ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 13px;
+  }
+
+  thead tr {
+    background: var(--deep-blue);
+    color: #ffffff;
+  }
+
+  thead th {
+    padding: 11px 14px;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  thead th:first-child {
+    text-align: left;
+    border-radius: 8px 0 0 0;
+  }
+
+  thead th:last-child {
+    border-radius: 0 8px 0 0;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+  }
+
+  tbody tr:nth-child(even) {
+    background: #f8fafd;
+  }
+
+  tbody td {
+    padding: 10px 14px;
+    color: var(--text-main);
+  }
+
+  tbody td:first-child {
+    font-weight: 500;
+    color: var(--mid-blue);
+  }
+
+  tbody td:not(:first-child) {
+    text-align: center;
+  }
+
+  .td-up { color: #e8677a; font-weight: 600; }
+  .td-down { color: #4a90d9; font-weight: 600; }
+  .td-neutral { color: var(--text-sub); }
+
+  /* ── 재무 하이라이트 카드 ── */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .kpi-card {
+    background: var(--bg-white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 14px;
+    text-align: center;
+  }
+
+  .kpi-label {
+    font-size: 11px;
+    color: var(--text-light);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .kpi-value {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 3px;
+  }
+
+  .kpi-change {
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  .kpi-change.up { color: var(--pink-main); }
+  .kpi-change.down { color: #4a90d9; }
+
+  /* ── 체크리스트 ── */
+  .checklist {
+    list-style: none;
+    margin-bottom: 20px;
+  }
+
+  .checklist li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--text-main);
+    line-height: 1.7;
+  }
+
+  .checklist li:last-child { border-bottom: none; }
+
+  .check-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .check-pos { background: rgba(232,103,122,0.15); color: var(--pink-main); }
+  .check-neg { background: rgba(74,144,217,0.15); color: #4a90d9; }
+  .check-neu { background: rgba(138,165,192,0.15); color: var(--slate); }
+
+  /* ── 성장 동력 블록 ── */
+  .driver-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .driver-card {
+    background: var(--bg-white);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--pink-main);
+    border-radius: 0 0 10px 10px;
+    padding: 18px 20px;
+  }
+
+  .driver-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 8px;
+  }
+
+  .driver-desc {
+    font-size: 13px;
+    color: var(--text-sub);
+    line-height: 1.7;
+  }
+
+  /* ── 리스크 ── */
+  .risk-item {
+    display: flex;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .risk-item:last-child { border-bottom: none; }
+
+  .risk-level {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    height: fit-content;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .risk-high { background: rgba(232,103,122,0.15); color: var(--pink-main); border: 1px solid rgba(232,103,122,0.3); }
+  .risk-mid { background: rgba(212,168,67,0.12); color: var(--accent-gold); border: 1px solid rgba(212,168,67,0.3); }
+  .risk-low { background: rgba(138,165,192,0.12); color: var(--slate); border: 1px solid rgba(138,165,192,0.3); }
+
+  .risk-content {}
+  .risk-title { font-size: 14px; font-weight: 600; color: var(--text-main); margin-bottom: 5px; }
+  .risk-desc { font-size: 13px; color: var(--text-sub); line-height: 1.7; }
+
+  /* ── 밸류에이션 ── */
+  .valuation-box {
+    background: var(--deep-blue);
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+
+  .val-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .val-row:last-child { border-bottom: none; }
+
+  .val-label { font-size: 13px; color: var(--slate); }
+  .val-value { font-size: 15px; font-weight: 600; color: #fff; }
+  .val-value.accent { color: var(--pink-light); font-size: 18px; }
+
+  /* ── 총평 ── */
+  .summary-box {
+    background: linear-gradient(135deg, #0f1e35 0%, #1a2f4e 50%, #2a1535 100%);
+    border-radius: 14px;
+    padding: 36px 36px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .summary-box::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,103,122,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .summary-opinion-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--slate);
+    margin-bottom: 6px;
+  }
+
+  .summary-opinion-value {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--pink-main);
+    margin-bottom: 20px;
+  }
+
+  .summary-text {
+    font-size: 14px;
+    line-height: 1.9;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 24px;
+  }
+
+  .summary-points {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .summary-point {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+
+  .summary-point-label {
+    font-size: 10px;
+    color: var(--pink-light);
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+  }
+
+  .summary-point-text {
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.6;
+  }
+
+  /* ── 주의 문구 ── */
+  .disclaimer {
+    background: #f0f4f8;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-size: 12px;
+    color: var(--text-sub);
+    line-height: 1.7;
+    margin-top: 48px;
+    text-align: center;
+  }
+
+  /* ── 구분선 ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+  }
+
+  /* ── 반응형 ── */
+  @media (max-width: 600px) {
+    .cover-company { font-size: 30px; }
+    .toc-grid { grid-template-columns: 1fr; }
+    .info-grid { grid-template-columns: 1fr 1fr; }
+    .kpi-row { grid-template-columns: 1fr 1fr; }
+    .driver-grid { grid-template-columns: 1fr; }
+    .summary-points { grid-template-columns: 1fr; }
+    .cover-meta { gap: 20px; }
+  }
+</style>
+
+
+</head><body>
+
+<!-- ════════════════════════════════════
+     표지
+════════════════════════════════════ -->
+<section class="cover" data-cid="LbTbtI">
+
+  <!-- 좌측 사이드바 -->
+  <div class="cover-sidebar editor-empty-block" data-cid="jvTNRN"></div>
+
+  <!-- 상단 헤더 -->
+  <div class="cover-header" data-cid="H0ud5Z">
+    <div class="cover-logo-area" data-cid="v-mT_I">
+      <div class="cover-logo-dot editor-empty-block" data-cid="l1vOUm"></div>
+      <span class="cover-logo-text" data-cid="c41o8f">Stock Research</span>
+    </div>
+    <span class="cover-header-right" data-cid="bGvGVt">기업분석 노트</span>
+  </div>
+
+  <!-- 메인 콘텐츠 -->
+  <div class="cover-body" data-cid="ofLvxU">
+    <!-- 배경 장식 -->
+    <div class="cover-dots editor-empty-block" data-cid="AqTYrO"></div>
+
+    <div class="cover-body-inner" data-cid="VUXrbe">
+      <!-- 리포트 유형 라벨 -->
+      <div class="cover-type" data-cid="t-D1lo">
+        <div class="cover-type-line editor-empty-block" data-cid="XtJqKl"></div>
+        <span class="cover-type-text" data-cid="BMCzUM">Company Analysis</span>
+      </div>
+
+      <!-- 종목 코드 -->
+      <div class="cover-ticker" data-cid="8qu8x2">KRX · 000000</div>
+
+      <!-- 기업명 -->
+      <h1 class="cover-company" data-cid="6l5uXA">기업명</h1>
+      <p class="cover-company-en" data-cid="j-ryHp">Company Name in English</p>
+
+      <!-- 섹터 태그 -->
+      <div class="cover-tags" data-cid="bUlhod">
+        <span class="cover-tag-chip cover-tag-blue" data-cid="ZaR5D_">섹터</span>
+        <span class="cover-tag-chip cover-tag-light" data-cid="M3PTut">업종</span>
+        <span class="cover-tag-chip cover-tag-light" data-cid="RQszjC">KOSPI / KOSDAQ</span>
+      </div>
+
+      <!-- 투자의견 — opinion-buy / opinion-hold / opinion-watch 중 선택 -->
+      <div class="cover-opinion opinion-buy" data-cid="eODDiu">
+        <div class="cover-opinion-dot editor-empty-block" data-cid="WxsjMI"></div>
+        매수 관심 · BUY
+      </div>
+    </div>
+  </div>
+
+  <!-- 하단 메타 바 -->
+  <div class="cover-footer" data-cid="uKu-UA">
+    <div class="cover-meta-item" data-cid="JQ--pA">
+      <div class="cover-meta-label" data-cid="1EMq3G">분석일</div>
+      <div class="cover-meta-value" data-cid="pjiQtM">2026.00.00</div>
+    </div>
+    <div class="cover-meta-item" data-cid="D1UkIt">
+      <div class="cover-meta-label" data-cid="1tGvIN">현재가</div>
+      <div class="cover-meta-value accent" data-cid="ls5wO5">000,000 원</div>
+    </div>
+    <div class="cover-meta-item" data-cid="AD75F9">
+      <div class="cover-meta-label" data-cid="31GCFB">시가총액</div>
+      <div class="cover-meta-value" data-cid="bHMRze">0.0조 원</div>
+    </div>
+    <div class="cover-meta-item" data-cid="4bwyS1">
+      <div class="cover-meta-label" data-cid="kV6bZu">기준 기간</div>
+      <div class="cover-meta-value" data-cid="FbidFH">2025년 연간</div>
+    </div>
+    <div class="cover-meta-item" data-cid="Fv49Ja">
+      <div class="cover-meta-label" data-cid="c7ExWf">작성자</div>
+      <div class="cover-meta-value" data-cid="fraev1">yeonka0106</div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ════════════════════════════════════
+     목차
+════════════════════════════════════ -->
+<section class="toc-section" data-cid="0XvdFB">
+  <p class="section-label" data-cid="y1rMxy">Table of Contents</p>
+  <h2 class="section-title" data-cid="TPUYoi">목차</h2>
+  <nav class="toc-grid" data-cid="mTMh6j">
+    <a class="toc-item" href="#sec1" data-cid="x6yHH1">
+      <span class="toc-num" data-cid="UAEPPP">01</span>
+      <span class="toc-text" data-cid="2UAyVg">기업 개요</span>
+      <span class="toc-sub" data-cid="oU_0cS">Overview</span>
+    </a>
+    <a class="toc-item" href="#sec2" data-cid="PI4Elr">
+      <span class="toc-num" data-cid="_dT2Rc">02</span>
+      <span class="toc-text" data-cid="JU1dUt">사업 구조</span>
+      <span class="toc-sub" data-cid="cbIuRJ">Business</span>
+    </a>
+    <a class="toc-item" href="#sec3" data-cid="C-KwH2">
+      <span class="toc-num" data-cid="_MAtaz">03</span>
+      <span class="toc-text" data-cid="0Qel5c">재무 분석</span>
+      <span class="toc-sub" data-cid="TGZ1Rg">Financials</span>
+    </a>
+    <a class="toc-item" href="#sec4" data-cid="V8HQE_">
+      <span class="toc-num" data-cid="q2v7ZM">04</span>
+      <span class="toc-text" data-cid="AUZ5Ga">성장 동력</span>
+      <span class="toc-sub" data-cid="NROmL1">Catalysts</span>
+    </a>
+    <a class="toc-item" href="#sec5" data-cid="2LuPhh">
+      <span class="toc-num" data-cid="zOfH4j">05</span>
+      <span class="toc-text" data-cid="E2G8dr">리스크</span>
+      <span class="toc-sub" data-cid="WgvC-d">Risk Factors</span>
+    </a>
+    <a class="toc-item" href="#sec6" data-cid="Lx75CO">
+      <span class="toc-num" data-cid="U3giwt">06</span>
+      <span class="toc-text" data-cid="m4anD3">밸류에이션</span>
+      <span class="toc-sub" data-cid="AJwJ3O">Valuation</span>
+    </a>
+    <a class="toc-item" href="#sec7" data-cid="1rGoIl">
+      <span class="toc-num" data-cid="DCcXap">07</span>
+      <span class="toc-text" data-cid="YSYw8Y">총평 &amp; 투자의견</span>
+      <span class="toc-sub" data-cid="Z2z7RE">Summary</span>
+    </a>
+  </nav>
+</section>
+
+
+<!-- ════════════════════════════════════
+     본문
+════════════════════════════════════ -->
+<article class="article-body" data-cid="muB7tV">
+
+  <!-- ── 01. 기업 개요 ── -->
+  <section class="content-section" id="sec1" data-cid="PYka4M">
+    <div class="section-header" data-cid="ErS9zE">
+      <div class="section-num" data-cid="epnUIC">01</div>
+      <h2 class="section-heading" data-cid="aOYbpQ">기업 개요 <span data-cid="h2KUYu">Company Overview</span></h2>
+    </div>
+
+    <div class="info-card" data-cid="QvarVc">
+      <div class="info-grid" data-cid="Cju8QB">
+        <div class="info-item" data-cid="eVXzZq">
+          <div class="info-label" data-cid="TN68BV">설립연도</div>
+          <div class="info-value" data-cid="OCnnp2">0000년</div>
+        </div>
+        <div class="info-item" data-cid="vbZS6E">
+          <div class="info-label" data-cid="NMmiUQ">상장일</div>
+          <div class="info-value" data-cid="CzuE4u">0000년 00월</div>
+        </div>
+        <div class="info-item" data-cid="5xkyZb">
+          <div class="info-label" data-cid="M-L2Fk">대표이사</div>
+          <div class="info-value" data-cid="VEUoNW">홍길동</div>
+        </div>
+        <div class="info-item" data-cid="DN-jL_">
+          <div class="info-label" data-cid="ZVG1ST">주요 사업</div>
+          <div class="info-value" data-cid="NV9wBf">사업명 기재</div>
+        </div>
+        <div class="info-item" data-cid="Q9hv0A">
+          <div class="info-label" data-cid="N9Ad9c">본사 소재지</div>
+          <div class="info-value" data-cid="Cf3_Pk">시/도</div>
+        </div>
+        <div class="info-item" data-cid="tLMiUL">
+          <div class="info-label" data-cid="_cZLcI">시가총액</div>
+          <div class="info-value highlight" data-cid="iaXgsW">0.0조 원</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-block" data-cid="g9ks_N">
+      <p data-cid="CtUmhB">기업에 대한 간략한 소개 및 사업 목적을 작성합니다. 어떤 회사인지, 어떤 방식으로 수익을 창출하는지, 주요 고객군은 누구인지를 2~3문장으로 요약합니다.</p>
+      <p data-cid="XRmYwY">이 기업이 투자 관점에서 주목받는 이유 또는 이 분석을 시작하게 된 계기를 간략히 언급합니다.</p>
+    </div>
+  </section>
+
+  <hr class="divider" data-cid="rz8KW9"/>
+
+  <!-- ── 02. 사업 구조 ── -->
+  <section class="content-section" id="sec2" data-cid="C_iL1A">
+    <div class="section-header" data-cid="6UlXjK">
+      <div class="section-num" data-cid="4lle1f">02</div>
+      <h2 class="section-heading" data-cid="wCtubC">사업 구조 <span data-cid="AsG3vA">Business Segments</span></h2>
+    </div>
+
+    <p class="sub-heading" data-cid="ngU3Nh">매출 세그먼트</p>
+    <div class="sk-doc-native-table-frame" data-scroll-left-active="false" data-scroll-right-active="false" data-scrolling="false" data-cid="cqn9t0"><table data-cid="DbUgxA">
+      <thead data-cid="I_-oRe">
+        <tr data-cid="lVWjhn">
+          <th data-cid="BZ1oKx">사업 부문</th>
+          <th data-cid="czZxPH">매출 비중</th>
+          <th data-cid="6P4zPw">주요 제품/서비스</th>
+          <th data-cid="gPvAlN">특이사항</th>
+        </tr>
+      </thead>
+      <tbody data-cid="hMWhlM">
+        <tr data-cid="IP1i-8">
+          <td data-cid="I-CvW0">부문 A</td>
+          <td data-cid="51kjXo">00%</td>
+          <td data-cid="5wvF_-">제품/서비스명</td>
+          <td class="td-neutral" data-cid="T5yePq">내용 기재</td>
+        </tr>
+        <tr data-cid="MjQ9zb">
+          <td data-cid="zytqRP">부문 B</td>
+          <td data-cid="xcXhEj">00%</td>
+          <td data-cid="mrNFXX">제품/서비스명</td>
+          <td class="td-neutral" data-cid="C38iky">내용 기재</td>
+        </tr>
+        <tr data-cid="ruNhMU">
+          <td data-cid="9kGur6">부문 C</td>
+          <td data-cid="v5Fr57">00%</td>
+          <td data-cid="RSTcZ6">제품/서비스명</td>
+          <td class="td-neutral" data-cid="6mO10A">내용 기재</td>
+        </tr>
+      </tbody>
+    </table></div>
+
+    <p class="sub-heading" data-cid="8qhJvu">경쟁 포지션</p>
+    <div class="text-block" data-cid="YDHA_T">
+      <p data-cid="acjlRd">시장 내 경쟁 구도, 점유율, 핵심 경쟁사 대비 차별점을 기재합니다. 해당 기업의 경쟁우위(모아트)가 무엇인지 간략히 설명합니다.</p>
+    </div>
+  </section>
+
+  <hr class="divider" data-cid="RQ6zqy"/>
+
+  <!-- ── 03. 재무 분석 ── -->
+  <section class="content-section" id="sec3" data-cid="XT6WDx">
+    <div class="section-header" data-cid="4RTBkC">
+      <div class="section-num" data-cid="Ek_Ubt">03</div>
+      <h2 class="section-heading" data-cid="LtZv1o">재무 분석 <span data-cid="GAG_a1">Financial Analysis</span></h2>
+    </div>
+
+    <div class="kpi-row" data-cid="jNXBVG">
+      <div class="kpi-card" data-cid="xhescl">
+        <div class="kpi-label" data-cid="ImQXsZ">매출액</div>
+        <div class="kpi-value" data-cid="BPf51d">0.0조</div>
+        <div class="kpi-change up" data-cid="RNeamW">YoY +0.0%</div>
+      </div>
+      <div class="kpi-card" data-cid="0LqFpc">
+        <div class="kpi-label" data-cid="wQzt6O">영업이익</div>
+        <div class="kpi-value" data-cid="1_1c2h">0,000억</div>
+        <div class="kpi-change up" data-cid="Y7vMte">YoY +0.0%</div>
+      </div>
+      <div class="kpi-card" data-cid="8CTj6A">
+        <div class="kpi-label" data-cid="Xbejf6">영업이익률</div>
+        <div class="kpi-value" data-cid="vXvGVc">0.0%</div>
+        <div class="kpi-change down" data-cid="lGaqm-">YoY -0.0%p</div>
+      </div>
+      <div class="kpi-card" data-cid="C9BM3B">
+        <div class="kpi-label" data-cid="nQtCt2">순이익</div>
+        <div class="kpi-value" data-cid="k_vWWN">0,000억</div>
+        <div class="kpi-change up" data-cid="r85anD">YoY +0.0%</div>
+      </div>
+    </div>
+
+    <p class="sub-heading" data-cid="StKBxn">연간 실적 추이</p>
+    <div class="sk-doc-native-table-frame" data-scroll-left-active="false" data-scroll-right-active="false" data-scrolling="false" data-cid="IHQxSg"><table data-cid="K5TVGW">
+      <thead data-cid="CUa4G2">
+        <tr data-cid="Q33WHA">
+          <th data-cid="99DBUY">항목</th>
+          <th data-cid="3EkBSa">2022</th>
+          <th data-cid="aunEEJ">2023</th>
+          <th data-cid="s9mk_d">2024</th>
+          <th data-cid="jDmgrY">2025E</th>
+        </tr>
+      </thead>
+      <tbody data-cid="VEhYf7">
+        <tr data-cid="UWfr_p">
+          <td data-cid="o13TAZ">매출액 (억원)</td>
+          <td data-cid="7cGT5v">00,000</td>
+          <td data-cid="u5vAkd">00,000</td>
+          <td data-cid="-8iefP">00,000</td>
+          <td data-cid="tKXYzx">00,000</td>
+        </tr>
+        <tr data-cid="ekrUcL">
+          <td data-cid="-_BDzi">영업이익 (억원)</td>
+          <td data-cid="0uiu6M">0,000</td>
+          <td data-cid="QdEN0I">0,000</td>
+          <td data-cid="4g-uoD">0,000</td>
+          <td data-cid="zc617u">0,000</td>
+        </tr>
+        <tr data-cid="LiGVkf">
+          <td data-cid="kfKr6A">영업이익률 (%)</td>
+          <td data-cid="E3QMV0">0.0</td>
+          <td data-cid="j1GGBT">0.0</td>
+          <td data-cid="bEebE6">0.0</td>
+          <td data-cid="gZNGgB">0.0</td>
+        </tr>
+        <tr data-cid="KrYOxE">
+          <td data-cid="7pW5vW">순이익 (억원)</td>
+          <td data-cid="To8Im-">0,000</td>
+          <td data-cid="geg03r">0,000</td>
+          <td data-cid="EnvcuM">0,000</td>
+          <td data-cid="kdCoW_">0,000</td>
+        </tr>
+        <tr data-cid="s2c7LP">
+          <td data-cid="gbO7sO">ROE (%)</td>
+          <td data-cid="ygbtlt">0.0</td>
+          <td data-cid="xjfejz">0.0</td>
+          <td data-cid="NgM1aJ">0.0</td>
+          <td data-cid="s-N_wH">0.0</td>
+        </tr>
+      </tbody>
+    </table></div>
+
+    <p class="sub-heading" data-cid="0Ns8qp">재무 건전성</p>
+    <div class="sk-doc-native-table-frame" data-scroll-left-active="false" data-scroll-right-active="false" data-scrolling="false" data-cid="VOZ2oM"><table data-cid="4FpDst">
+      <thead data-cid="yS9n1l">
+        <tr data-cid="5pmagN">
+          <th data-cid="KN3ccF">항목</th>
+          <th data-cid="nvscAq">수치</th>
+          <th data-cid="qZo40G">업종 평균</th>
+          <th data-cid="F-l97D">평가</th>
+        </tr>
+      </thead>
+      <tbody data-cid="3Srnh7">
+        <tr data-cid="CdkMiF">
+          <td data-cid="mMxcYt">부채비율</td>
+          <td data-cid="_yuxsa">000%</td>
+          <td data-cid="jJunCN">000%</td>
+          <td class="td-neutral" data-cid="aw8Acl">양호 / 주의</td>
+        </tr>
+        <tr data-cid="ZROJ-l">
+          <td data-cid="CZSlPh">유동비율</td>
+          <td data-cid="NYdMkj">000%</td>
+          <td data-cid="XmqJTc">000%</td>
+          <td class="td-up" data-cid="_K-0pD">양호</td>
+        </tr>
+        <tr data-cid="9fmenA">
+          <td data-cid="EOz2nW">이자보상배율</td>
+          <td data-cid="8aMYwL">0.0x</td>
+          <td data-cid="Ke-vp-">0.0x</td>
+          <td class="td-neutral" data-cid="Ew35Cm">보통</td>
+        </tr>
+        <tr data-cid="sOBJVV">
+          <td data-cid="1kFt4B">순현금/순부채</td>
+          <td data-cid="PP6c2_">+0,000억</td>
+          <td data-cid="Gyvgm8">—</td>
+          <td class="td-up" data-cid="ihg8Tv">순현금</td>
+        </tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <hr class="divider" data-cid="f7mRY8"/>
+
+  <!-- ── 04. 성장 동력 ── -->
+  <section class="content-section" id="sec4" data-cid="vuxEjO">
+    <div class="section-header" data-cid="H5EDae">
+      <div class="section-num" data-cid="PBIPoO">04</div>
+      <h2 class="section-heading" data-cid="aBBT9M">성장 동력 <span data-cid="tJErg5">Growth Catalysts</span></h2>
+    </div>
+
+    <div class="driver-grid" data-cid="YrGj0N">
+      <div class="driver-card" data-cid="aj1rVY">
+        <div class="driver-title" data-cid="0KVohH">성장 동력 1</div>
+        <div class="driver-desc" data-cid="L9cA1h">성장 동력에 대한 구체적인 설명을 작성합니다. 왜 이것이 중요한지, 어느 정도의 규모인지 기재합니다.</div>
+      </div>
+      <div class="driver-card" data-cid="nWPMdq">
+        <div class="driver-title" data-cid="Y2CXi_">성장 동력 2</div>
+        <div class="driver-desc" data-cid="J6iMvt">성장 동력에 대한 구체적인 설명을 작성합니다. 시장 확장, 신사업, 신제품 등의 내용을 포함합니다.</div>
+      </div>
+      <div class="driver-card" data-cid="fVigbR">
+        <div class="driver-title" data-cid="atK9Hx">성장 동력 3</div>
+        <div class="driver-desc" data-cid="mIIWXd">비용 구조 개선, 수익성 향상 계획 등 내부 효율화 요소를 기재합니다.</div>
+      </div>
+      <div class="driver-card" data-cid="7wDeZS">
+        <div class="driver-title" data-cid="lnPII2">성장 동력 4</div>
+        <div class="driver-desc" data-cid="1spHJe">정책 수혜, 산업 트렌드 등 외부 환경 요인을 설명합니다.</div>
+      </div>
+    </div>
+
+    <div class="text-block" data-cid="RFLHYZ">
+      <p data-cid="Ru7dij">성장 동력에 대한 종합적인 시각을 추가로 기재합니다. 어떤 동력이 가장 핵심이고, 언제 가시화될 것으로 예상하는지 작성합니다.</p>
+    </div>
+  </section>
+
+  <hr class="divider" data-cid="ohiNDp"/>
+
+  <!-- ── 05. 리스크 ── -->
+  <section class="content-section" id="sec5" data-cid="UMkzUO">
+    <div class="section-header" data-cid="kFhQc4">
+      <div class="section-num" data-cid="vtUYPp">05</div>
+      <h2 class="section-heading" data-cid="pej6WA">리스크 <span data-cid="2TDUOc">Risk Factors</span></h2>
+    </div>
+
+    <ul class="checklist" data-cid="0W1oUr">
+      <li data-cid="_OOIMO">
+        <span class="risk-level risk-high" data-cid="k9s4k1">HIGH</span>
+        <div class="risk-content" data-cid="BJlqAe">
+          <div class="risk-title" data-cid="WD8orY">리스크 항목 1</div>
+          <div class="risk-desc" data-cid="fXhbEN">해당 리스크가 왜 중요한지, 어떤 경로로 실적 또는 주가에 영향을 줄 수 있는지 구체적으로 기재합니다.</div>
+        </div>
+      </li>
+      <li data-cid="TRxFh9">
+        <span class="risk-level risk-mid" data-cid="9IIcng">MID</span>
+        <div class="risk-content" data-cid="72NK6M">
+          <div class="risk-title" data-cid="uZjF3G">리스크 항목 2</div>
+          <div class="risk-desc" data-cid="5rog9E">중간 수준의 리스크 요인을 설명합니다. 모니터링이 필요한 지표나 이벤트를 명시합니다.</div>
+        </div>
+      </li>
+      <li data-cid="U2H-km">
+        <span class="risk-level risk-mid" data-cid="u52l4f">MID</span>
+        <div class="risk-content" data-cid="tI73SP">
+          <div class="risk-title" data-cid="TEJvof">리스크 항목 3</div>
+          <div class="risk-desc" data-cid="3Sffl3">경쟁사 동향, 기술 변화, 규제 이슈 등을 포함합니다.</div>
+        </div>
+      </li>
+      <li data-cid="wmlhVA">
+        <span class="risk-level risk-low" data-cid="AApIha">LOW</span>
+        <div class="risk-content" data-cid="vGLcrL">
+          <div class="risk-title" data-cid="yPnqZn">리스크 항목 4</div>
+          <div class="risk-desc" data-cid="K8IpbS">현재로서는 영향이 크지 않지만 장기적으로 주시해야 할 요소를 기재합니다.</div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <hr class="divider" data-cid="4jhXwy"/>
+
+  <!-- ── 06. 밸류에이션 ── -->
+  <section class="content-section" id="sec6" data-cid="q1ryu-">
+    <div class="section-header" data-cid="DCoXRn">
+      <div class="section-num" data-cid="8CATvn">06</div>
+      <h2 class="section-heading" data-cid="GJ_ZJB">밸류에이션 <span data-cid="faY_06">Valuation</span></h2>
+    </div>
+
+    <div class="valuation-box" data-cid="cOtY0R">
+      <div class="val-row" data-cid="6CMy9R">
+        <span class="val-label" data-cid="EXG5Cm">현재 주가</span>
+        <span class="val-value" data-cid="znRsf0">000,000 원</span>
+      </div>
+      <div class="val-row" data-cid="arTxEY">
+        <span class="val-label" data-cid="tCdDVh">현재 PER (TTM)</span>
+        <span class="val-value" data-cid="GUF1mt">00.0x</span>
+      </div>
+      <div class="val-row" data-cid="mWN478">
+        <span class="val-label" data-cid="_J2R8j">현재 PBR</span>
+        <span class="val-value" data-cid="i2pwV6">0.0x</span>
+      </div>
+      <div class="val-row" data-cid="wnNyph">
+        <span class="val-label" data-cid="VCQlV_">EV/EBITDA</span>
+        <span class="val-value" data-cid="YNoXOo">00.0x</span>
+      </div>
+      <div class="val-row" data-cid="SXUJd7">
+        <span class="val-label" data-cid="RRotAa">업종 평균 PER</span>
+        <span class="val-value" data-cid="ALTRtJ">00.0x</span>
+      </div>
+      <div class="val-row" data-cid="5ScqD-">
+        <span class="val-label" data-cid="m0R8gC">적정 주가 추정</span>
+        <span class="val-value accent" data-cid="7sOyxR">000,000 ~ 000,000 원</span>
+      </div>
+    </div>
+
+    <div class="text-block" data-cid="FwLkiH">
+      <p data-cid="TBV4Ed">현재 밸류에이션이 역사적 밴드 대비 어느 수준인지, 피어 대비 프리미엄/디스카운트가 납득되는지 분석합니다.</p>
+      <p data-cid="gTQYdx">사용한 밸류에이션 방법론(PER, PBR, DCF, EV/EBITDA 등)과 핵심 가정을 간략히 기재합니다.</p>
+    </div>
+
+    <p class="sub-heading" data-cid="G6rYbC">피어 비교</p>
+    <div class="sk-doc-native-table-frame" data-scroll-left-active="false" data-scroll-right-active="false" data-scrolling="false" data-cid="CPfyPo"><table data-cid="6-Dowt">
+      <thead data-cid="xE0SGy">
+        <tr data-cid="cVmpnM">
+          <th data-cid="4KE0S7">기업명</th>
+          <th data-cid="iUgngE">시총(조)</th>
+          <th data-cid="NWZta1">PER</th>
+          <th data-cid="Kxfy1A">PBR</th>
+          <th data-cid="Is-xlO">영업이익률</th>
+          <th data-cid="rxaHSl">ROE</th>
+        </tr>
+      </thead>
+      <tbody data-cid="tAlfcV">
+        <tr data-cid="lFusGb">
+          <td data-cid="NvdQtO">분석 기업 (현재)</td>
+          <td data-cid="VSZyxI">0.0</td>
+          <td class="td-up" data-cid="mQ2m08">00.0x</td>
+          <td data-cid="_U_12f">0.0x</td>
+          <td data-cid="SXBmdB">0.0%</td>
+          <td data-cid="nYE712">0.0%</td>
+        </tr>
+        <tr data-cid="WQ0azY">
+          <td data-cid="_hxzdv">피어 기업 A</td>
+          <td data-cid="d3l8uo">0.0</td>
+          <td data-cid="2Ok1WH">00.0x</td>
+          <td data-cid="7JLwGp">0.0x</td>
+          <td data-cid="MviGrp">0.0%</td>
+          <td data-cid="c1NVCS">0.0%</td>
+        </tr>
+        <tr data-cid="z6snAT">
+          <td data-cid="CY_nAi">피어 기업 B</td>
+          <td data-cid="wgIsV5">0.0</td>
+          <td data-cid="mGMXCF">00.0x</td>
+          <td data-cid="N4R90p">0.0x</td>
+          <td data-cid="WnQA9Z">0.0%</td>
+          <td data-cid="C6zm1N">0.0%</td>
+        </tr>
+        <tr data-cid="AkiW3f">
+          <td data-cid="GFpwkU">업종 평균</td>
+          <td data-cid="CuCey3">—</td>
+          <td data-cid="zMtpmp">00.0x</td>
+          <td data-cid="J-hSUI">0.0x</td>
+          <td data-cid="OBrOr-">0.0%</td>
+          <td data-cid="g1x4HW">0.0%</td>
+        </tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <hr class="divider" data-cid="PHbcEk"/>
+
+  <!-- ── 07. 총평 &amp; 투자의견 ── -->
+  <section class="content-section" id="sec7" data-cid="2nhrXJ">
+    <div class="section-header" data-cid="jsAZ4N">
+      <div class="section-num" data-cid="8hX-f0">07</div>
+      <h2 class="section-heading" data-cid="EEWbeT">총평 &amp; 투자의견 <span data-cid="KO9F4B">Summary</span></h2>
+    </div>
+
+    <div class="summary-box" data-cid="BKp8mK">
+      <div class="summary-opinion-label" data-cid="WDL8cE">INVESTMENT OPINION</div>
+      <div class="summary-opinion-value" data-cid="MCz7RJ">매수 관심 · BUY</div>
+      <p class="summary-text" data-cid="7ST0Iu">
+        총평 내용을 작성합니다. 앞에서 분석한 내용을 바탕으로 이 기업을 왜 긍정적/부정적으로 보는지, 어떤 조건이 충족되면 투자할 것인지 간략히 정리합니다. 개인 공부 노트 형식으로 솔직한 시각을 담으면 더욱 좋습니다.
+      </p>
+      <div class="summary-points" data-cid="NiZM4j">
+        <div class="summary-point" data-cid="QW_yd4">
+          <div class="summary-point-label" data-cid="gn7nlY">BULL CASE</div>
+          <div class="summary-point-text" data-cid="ssdyqx">긍정 시나리오: 기대했던 성장 동력이 가시화될 경우 어느 수준의 주가를 기대할 수 있는지 기재합니다.</div>
+        </div>
+        <div class="summary-point" data-cid="DSeGHB">
+          <div class="summary-point-label" data-cid="vtNy8Q">BEAR CASE</div>
+          <div class="summary-point-text" data-cid="_L4Rkg">부정 시나리오: 주요 리스크가 현실화될 경우 하방은 어느 수준인지 기재합니다.</div>
+        </div>
+        <div class="summary-point" data-cid="cq3auA">
+          <div class="summary-point-label" data-cid="UePraM">매수 조건</div>
+          <div class="summary-point-text" data-cid="yn7YPW">어떤 주가 또는 조건에서 매수를 고려할지 나만의 기준을 기재합니다.</div>
+        </div>
+        <div class="summary-point" data-cid="2jdeK5">
+          <div class="summary-point-label" data-cid="LVse6S">모니터링 포인트</div>
+          <div class="summary-point-text" data-cid="cqB2p8">분기별로 확인해야 할 지표, 이벤트, 공시 등을 기재합니다.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="disclaimer editor-empty-block" data-cid="OSRINs">
+      본 글은 개인 공부 목적으로 작성된 분석 노트이며, 투자 권유가 아닙니다.<br data-cid="Oi6WZa"/>
+      모든 투자 결정은 본인의 판단과 책임 하에 이루어져야 합니다.
+    </div>
+  </section>
+
+</article>
+<!-- 저장 버튼 (GitHub 업로드용) -->
+<div style="position:fixed;bottom:28px;right:28px;z-index:9999;" data-cid="lOLxWp">
+  <button onclick="downloadHTML()" style="display:flex;align-items:center;gap:8px;background:#1a3a6e;color:#fff;border:none;
+           padding:13px 22px;border-radius:8px;font-size:13px;font-weight:700;
+           cursor:pointer;box-shadow:0 4px 16px rgba(26,58,110,0.35);letter-spacing:1px;" data-cid="clYqwl">
+    ↓ HTML 파일 저장
+  </button>
+</div>
+<script data-cid="loeVKI">
+function downloadHTML() {
+  const blob = new Blob([document.documentElement.outerHTML], {type: 'text/html;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'corporate_analysis_template.html';
+  a.click();
+}
+</script>
+
+
+</body></html>
